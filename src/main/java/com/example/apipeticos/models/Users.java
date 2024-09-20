@@ -34,4 +34,19 @@ public class Users {
     int idPlan;
     Long cnpj;
 
+
+    @Override
+    public String toString() {
+        return "Users { " +
+                "idUser= " + idUser +
+                ", idAddress= " + idAddress +
+                ", fullName= '" + fullName + '\'' +
+                ", username= '" + username + '\'' +
+                ", email= '" + email + '\'' +
+                ", password= '" + password + '\'' +
+                ", gender= '" + gender + '\'' +
+                ", idPlan= " + idPlan +
+                ", cnpj= " + cnpj +
+                " }";
+    }
 }

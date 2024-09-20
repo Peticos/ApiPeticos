@@ -20,7 +20,7 @@ public class UserController {
 
     private final UsersService usersService;
 
-    @Autowired //ele faz a injeção de dependência no programa. Ele não é necessário quando criamos o programa.
+    @Autowired
     public UserController(  UsersService usersService){
         this.usersService = usersService;
     }
@@ -32,13 +32,23 @@ public class UserController {
 
 
     @PostMapping("/insert")
-    public ResponseEntity<String> inserirProduto(@Valid @RequestBody Users users, BindingResult resultado){
+    public ResponseEntity<String> insertUser(@Valid @RequestBody Users users, BindingResult resultado){
         if (resultado.hasErrors()){
             Map<String, String> erros = validateUser(resultado);
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(erros.toString());
         }else {
-            usersService.addUser(users);
-            return ResponseEntity.ok("Produto inserido com sucesso");
+            usersService.createUser(users);
+            return ResponseEntity.ok("User inserted with success");
+        }
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> deleteUser(@PathVariable Long id){
+        if (usersService.findbyId(id) != null) {
+            Users deleted = usersService.deleteUser(id);
+            return ResponseEntity.ok("User deleted with sucess : "+deleted);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
         }
     }
 

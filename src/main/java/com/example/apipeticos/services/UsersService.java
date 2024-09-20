@@ -21,8 +21,8 @@ public class UsersService {
     }
 
     @Transactional
-    public Users addUser(Users user){
-        return usersRepository.save(user); // o save serve para salvar o objeto ou alterar
+    public Users createUser(Users user){
+        return usersRepository.save(user);
     }
 
     public Users findbyId(long id){
