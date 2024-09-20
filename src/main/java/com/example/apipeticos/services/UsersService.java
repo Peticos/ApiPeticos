@@ -21,7 +21,7 @@ public class UsersService {
     }
 
     @Transactional
-    public Users salvarProduto(Users user){
+    public Users addUser(Users user){
         return usersRepository.save(user); // o save serve para salvar o objeto ou alterar
     }
 

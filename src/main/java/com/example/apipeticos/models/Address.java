@@ -12,26 +12,19 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-@Table(name = "User_")
-public class Users {
+@Table(name = "address")
+public class Address {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long idUser;
-    @NotNull
     Long idAddress;
     @NotNull
-    String fullName;
+    String city;
     @NotNull
-    String username;
+    String state;
     @NotNull
-    String email;
-    @NotNull
-    String password;
-    @NotNull
-    String gender;
-    @NotNull
-    int idPlan;
-    Long cnpj;
+    String neighborhood;
+
+
 
 }
