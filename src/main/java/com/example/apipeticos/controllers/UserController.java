@@ -37,7 +37,7 @@ public class UserController {
             Map<String, String> erros = validateUser(resultado);
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(erros.toString());
         }else {
-            usersService.createUser(users);
+            usersService.saveUser(users);
             return ResponseEntity.ok("User inserted with success");
         }
     }
@@ -51,6 +51,73 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
         }
     }
+
+    @PutMapping("/update/{id}")
+    public ResponseEntity<String> updateUser(@PathVariable long id,
+                                                   @Valid @RequestBody Users userUpdated, BindingResult result){
+
+        if (result.hasErrors()){
+            Map<String, String> erros = validateUser(result);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(erros.toString());
+        }else {
+            Users user = usersService.findbyId(id);
+            user.setFullName(userUpdated.getFullName());
+            user.setEmail(userUpdated.getEmail());
+            user.setPassword(userUpdated.getPassword());
+            user.setUsername(userUpdated.getUsername());
+            user.setGender(userUpdated.getGender());
+            user.setIdPlan(userUpdated.getIdPlan());
+            user.setIdAddress(userUpdated.getIdAddress());
+            user.setCnpj(userUpdated.getCnpj());
+            usersService.saveUser(user);
+            return ResponseEntity.ok("User updated with success");
+        }
+    }
+
+    @PatchMapping ("/partialupdate/{id}")
+    public ResponseEntity<String> atualizarParcial(@PathVariable Long id,
+                                                   @RequestBody Map<String, Object> changes){
+
+        Users usersExistente = usersService.findbyId(id);
+        if (usersExistente != null){
+            Users user = usersExistente;
+
+            if (changes.containsKey("fullName")){
+                user.setFullName(String.valueOf(changes.get("fullName")));
+            }
+            if (changes.containsKey("email")){
+                user.setEmail(String.valueOf(changes.get("email")));
+            }
+            if (changes.containsKey("password")){
+                user.setPassword(String.valueOf(changes.get("password")));
+            }
+            if (changes.containsKey("username")){
+                user.setUsername(String.valueOf(changes.get("username")));
+            }
+            if (changes.containsKey("gender")){
+                user.setGender(String.valueOf(changes.get("gender")));
+            }
+            if (changes.containsKey("idPlan")){
+                user.setIdPlan((Integer) changes.get("idPlan"));
+            }
+            if (changes.containsKey("cnpj")){
+                user.setCnpj((Long) changes.get("cnpj"));
+            }
+            if (changes.containsKey("idAddress")){
+                user.setIdAddress((Long) changes.get("idAddress"));
+            }
+
+
+
+
+            usersService.saveUser(user);
+
+            return ResponseEntity.ok("Alterado com sucesso");
+        }
+        return ResponseEntity.notFound().build();
+    }
+
+
 
     public Map<String, String> validateUser(BindingResult result){
         Map<String, String> erros = new HashMap<>();

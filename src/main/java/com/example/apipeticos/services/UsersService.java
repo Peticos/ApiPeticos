@@ -21,7 +21,7 @@ public class UsersService {
     }
 
     @Transactional
-    public Users createUser(Users user){
+    public Users saveUser(Users user){
         return usersRepository.save(user);
     }
 
