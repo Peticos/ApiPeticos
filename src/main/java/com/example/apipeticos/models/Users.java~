@@ -27,6 +27,8 @@ public class Users {
     @NotNull
     String email;
     @NotNull
+    String password;
+    @NotNull
     String gender;
     @NotNull
     int idPlan;
@@ -41,6 +43,7 @@ public class Users {
                 ", fullName= '" + fullName + '\'' +
                 ", username= '" + username + '\'' +
                 ", email= '" + email + '\'' +
+                ", password= '" + password + '\'' +
                 ", gender= '" + gender + '\'' +
                 ", idPlan= " + idPlan +
                 ", cnpj= " + cnpj +

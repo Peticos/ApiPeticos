@@ -63,7 +63,6 @@ public class UserController {
             Users user = usersService.findbyId(id);
             user.setFullName(userUpdated.getFullName());
             user.setEmail(userUpdated.getEmail());
-            user.setPassword(userUpdated.getPassword());
             user.setUsername(userUpdated.getUsername());
             user.setGender(userUpdated.getGender());
             user.setIdPlan(userUpdated.getIdPlan());
@@ -87,9 +86,6 @@ public class UserController {
             }
             if (changes.containsKey("email")){
                 user.setEmail(String.valueOf(changes.get("email")));
-            }
-            if (changes.containsKey("password")){
-                user.setPassword(String.valueOf(changes.get("password")));
             }
             if (changes.containsKey("username")){
                 user.setUsername(String.valueOf(changes.get("username")));
