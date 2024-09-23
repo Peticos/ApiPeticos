@@ -20,4 +20,10 @@ jobs:
     - name: Compilando Maven
       run: mvn -B package -DskipTests --file pom.xml
 
+    - name: Render Deploy Action
+      uses: johnbeynon/render-deploy-action@v0.0.8
+      with:
+        service-id: ${{ secrets.ServiceIdDev }}
+        api-key: ${{ secrets.ApiKeyMain }}
+
           
