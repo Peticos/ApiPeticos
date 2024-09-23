@@ -27,7 +27,7 @@ public class UsersService {
 
     public Users findbyId(long id){
         return usersRepository.findById(id).orElseThrow(() ->
-                new RuntimeException("Usuario não encontrado"));
+                new RuntimeException("User not found"));
     }
 
     public Users deleteUser(long id){

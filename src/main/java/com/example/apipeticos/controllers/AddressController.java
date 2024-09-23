@@ -18,7 +18,7 @@ public class AddressController {
 
     private final AddressService addressService;
 
-    @Autowired //ele faz a injeção de dependência no programa. Ele não é necessário quando criamos o programa.
+    @Autowired
     public AddressController(  AddressService addressService){
         this.addressService = addressService;
     }
