@@ -97,7 +97,7 @@ public class UserController {
                 user.setIdPlan((Integer) changes.get("idPlan"));
             }
             if (changes.containsKey("cnpj")){
-                user.setCnpj((Long) changes.get("cnpj"));
+                user.setCnpj((String) changes.get("cnpj"));
             }
             if (changes.containsKey("idAddress")){
                 user.setIdAddress((Long) changes.get("idAddress"));

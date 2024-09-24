@@ -30,7 +30,7 @@ public class Users {
     String gender;
     @NotNull
     int idPlan;
-    Long cnpj;
+    String cnpj;
 
 
     @Override
