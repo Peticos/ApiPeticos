@@ -113,6 +113,10 @@ public class UserController {
         return ResponseEntity.notFound().build();
     }
 
+    @GetMapping("/getbyusername/{username}")
+    public Users findByUsername(@PathVariable String username){
+        return usersService.findByUsername(username);
+    }
 
 
     public Map<String, String> validateUser(BindingResult result){

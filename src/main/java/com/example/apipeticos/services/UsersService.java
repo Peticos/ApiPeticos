@@ -25,6 +25,10 @@ public class UsersService {
         return usersRepository.save(user);
     }
 
+    public Users findByUsername(String username){
+        return usersRepository.findByUsername(username);
+    }
+
     public Users findbyId(long id){
         return usersRepository.findById(id).orElseThrow(() ->
                 new RuntimeException("User not found"));
