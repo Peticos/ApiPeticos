@@ -1,5 +1,6 @@
 package com.example.apipeticos.services;
 
+import com.example.apipeticos.models.TutorRequest;
 import com.example.apipeticos.models.Users;
 import com.example.apipeticos.repositories.UsersRepository;
 import jakarta.transaction.Transactional;
@@ -32,6 +33,10 @@ public class UsersService {
     public Users findbyId(long id){
         return usersRepository.findById(id).orElseThrow(() ->
                 new RuntimeException("User not found"));
+    }
+
+    public void insertUser(TutorRequest tutorRequest) {
+        usersRepository.insertUserTutor(tutorRequest.getFullName(), tutorRequest.getUsername(), tutorRequest.getEmail(), tutorRequest.getBairro(), tutorRequest.getPlan(), tutorRequest.getPhone(), tutorRequest.getGender());
     }
 
     public Users deleteUser(long id){

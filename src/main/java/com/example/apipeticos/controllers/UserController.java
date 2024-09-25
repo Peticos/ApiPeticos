@@ -1,5 +1,6 @@
 package com.example.apipeticos.controllers;
 
+import com.example.apipeticos.models.TutorRequest;
 import com.example.apipeticos.models.Users;
 import com.example.apipeticos.services.UsersService;
 import jakarta.validation.Valid;
@@ -40,6 +41,12 @@ public class UserController {
             usersService.saveUser(users);
             return ResponseEntity.ok("User inserted with success");
         }
+    }
+
+    @PostMapping("/inserttutor")
+    public ResponseEntity<String> inserirUsuario(@RequestBody TutorRequest tutorRequest) {
+        usersService.insertUser(tutorRequest);
+        return ResponseEntity.ok("Usuário inserido com sucesso");
     }
 
     @DeleteMapping("/delete/{id}")

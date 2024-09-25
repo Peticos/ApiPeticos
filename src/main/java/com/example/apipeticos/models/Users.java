@@ -26,11 +26,11 @@ public class Users {
     String username;
     @NotNull
     String email;
-    @NotNull
     String gender;
     @NotNull
     int idPlan;
     String cnpj;
+
 
 
     @Override

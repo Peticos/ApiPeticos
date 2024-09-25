@@ -42,6 +42,20 @@ public class UserController {
         }
     }
 
+    @PostMapping("/inserttutor")
+    public ResponseEntity<String> inserirUsuario(
+            @RequestParam String fullName,
+            @RequestParam String username,
+            @RequestParam String email,
+            @RequestParam String bairro,
+            @RequestParam String plan,
+            @RequestParam String phone,
+            @RequestParam String gender
+    ) {
+        usersService.insertUser(fullName, username, email, bairro, plan, phone, gender);
+        return ResponseEntity.ok("Usuário inserido com sucesso");
+    }
+
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteUser(@PathVariable Long id){
         if (usersService.findbyId(id) != null) {
@@ -102,6 +116,9 @@ public class UserController {
             if (changes.containsKey("idAddress")){
                 user.setIdAddress((Long) changes.get("idAddress"));
             }
+
+
+
 
             usersService.saveUser(user);
 
