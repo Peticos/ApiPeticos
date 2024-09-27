@@ -20,7 +20,7 @@ public class UserController {
 
     private final UsersService usersService;
 
-    @Autowired //ele faz a injeção de dependência no programa. Ele não é necessário quando criamos o programa.
+    @Autowired
     public UserController(  UsersService usersService){
         this.usersService = usersService;
     }
@@ -32,15 +32,117 @@ public class UserController {
 
 
     @PostMapping("/insert")
-    public ResponseEntity<String> inserirProduto(@Valid @RequestBody Users users, BindingResult resultado){
+    public ResponseEntity<String> insertUser(@Valid @RequestBody Users users, BindingResult resultado){
         if (resultado.hasErrors()){
             Map<String, String> erros = validateUser(resultado);
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(erros.toString());
         }else {
-            usersService.addUser(users);
-            return ResponseEntity.ok("Produto inserido com sucesso");
+            usersService.saveUser(users);
+            return ResponseEntity.ok("User inserted with success");
         }
     }
+
+    @PostMapping("/inserttutor")
+    public ResponseEntity<String> inserirUsuario(@Valid @RequestBody Users tutorRequest, BindingResult result) {
+
+        if (result.hasErrors()){
+            Map<String, String> erros = validateUser(result);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(erros.toString());
+        }else {
+            usersService.insertUser(tutorRequest);
+            return ResponseEntity.ok("Usuário inserido com sucesso");
+        }
+
+    }
+
+    @PostMapping("/insertprofissional")
+    public ResponseEntity<String> inserirProfissional(@Valid @RequestBody Users tutorRequest, BindingResult result) {
+        if (result.hasErrors()){
+            Map<String, String> erros = validateUser(result);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(erros.toString());
+        }else {
+            usersService.insertUserProfissonal(tutorRequest);
+            return ResponseEntity.ok("Usuário inserido com sucesso");
+        }
+    }
+
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> deleteUser(@PathVariable Long id){
+        if (usersService.findbyId(id) != null) {
+            Users deleted = usersService.deleteUser(id);
+            return ResponseEntity.ok("User deleted with sucess : "+deleted);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
+        }
+    }
+
+    @PutMapping("/update/{id}")
+    public ResponseEntity<String> updateUser(@PathVariable long id,
+                                                   @Valid @RequestBody Users userUpdated, BindingResult result){
+
+        if (result.hasErrors()){
+            Map<String, String> erros = validateUser(result);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(erros.toString());
+        }else {
+            Users user = usersService.findbyId(id);
+            user.setFullName(userUpdated.getFullName());
+            user.setEmail(userUpdated.getEmail());
+            user.setUsername(userUpdated.getUsername());
+            user.setGender(userUpdated.getGender());
+            user.setIdPlan(userUpdated.getIdPlan());
+            user.setIdAddress(userUpdated.getIdAddress());
+            user.setCnpj(userUpdated.getCnpj());
+            usersService.saveUser(user);
+            return ResponseEntity.ok("User updated with success");
+        }
+    }
+
+    @PatchMapping ("/partialupdate/{id}")
+    public ResponseEntity<String> atualizarParcial(@PathVariable Long id,
+                                                   @RequestBody Map<String, Object> changes){
+
+        Users usersExistente = usersService.findbyId(id);
+        if (usersExistente != null){
+            Users user = usersExistente;
+
+            if (changes.containsKey("fullName")){
+                user.setFullName(String.valueOf(changes.get("fullName")));
+            }
+            if (changes.containsKey("email")){
+                user.setEmail(String.valueOf(changes.get("email")));
+            }
+            if (changes.containsKey("username")){
+                user.setUsername(String.valueOf(changes.get("username")));
+            }
+            if (changes.containsKey("gender")){
+                user.setGender(String.valueOf(changes.get("gender")));
+            }
+            if (changes.containsKey("idPlan")){
+                user.setIdPlan((Integer) changes.get("idPlan"));
+            }
+            if (changes.containsKey("cnpj")){
+                user.setCnpj((String) changes.get("cnpj"));
+            }
+            if (changes.containsKey("idAddress")){
+                user.setIdAddress((Long) changes.get("idAddress"));
+            }
+
+
+
+
+            usersService.saveUser(user);
+
+            return ResponseEntity.ok("Alterado com sucesso");
+        }
+        return ResponseEntity.notFound().build();
+    }
+
+    @GetMapping("/getbyusername/{username}")
+    public Users findByUsername(@PathVariable String username){
+        return usersService.findByUsername(username);
+    }
+
 
     public Map<String, String> validateUser(BindingResult result){
         Map<String, String> erros = new HashMap<>();
