@@ -18,7 +18,6 @@ public class Users {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long idUser;
-    @NotNull
     Long idAddress;
     @NotNull
     String fullName;
@@ -27,9 +26,15 @@ public class Users {
     @NotNull
     String email;
     String gender;
-    @NotNull
     int idPlan;
     String cnpj;
+    @Transient
+    private String Plan;
+    @Transient
+    private String bairro;
+    @Transient
+    private String phone;
+
 
 
 

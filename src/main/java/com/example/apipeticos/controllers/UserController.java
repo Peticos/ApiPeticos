@@ -1,6 +1,5 @@
 package com.example.apipeticos.controllers;
 
-import com.example.apipeticos.models.TutorRequest;
 import com.example.apipeticos.models.Users;
 import com.example.apipeticos.services.UsersService;
 import jakarta.validation.Valid;
@@ -44,10 +43,29 @@ public class UserController {
     }
 
     @PostMapping("/inserttutor")
-    public ResponseEntity<String> inserirUsuario(@RequestBody TutorRequest tutorRequest) {
-        usersService.insertUser(tutorRequest);
-        return ResponseEntity.ok("Usuário inserido com sucesso");
+    public ResponseEntity<String> inserirUsuario(@Valid @RequestBody Users tutorRequest, BindingResult result) {
+
+        if (result.hasErrors()){
+            Map<String, String> erros = validateUser(result);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(erros.toString());
+        }else {
+            usersService.insertUser(tutorRequest);
+            return ResponseEntity.ok("Usuário inserido com sucesso");
+        }
+
     }
+
+    @PostMapping("/insertprofissional")
+    public ResponseEntity<String> inserirProfissional(@Valid @RequestBody Users tutorRequest, BindingResult result) {
+        if (result.hasErrors()){
+            Map<String, String> erros = validateUser(result);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(erros.toString());
+        }else {
+            usersService.insertUserProfissonal(tutorRequest);
+            return ResponseEntity.ok("Usuário inserido com sucesso");
+        }
+    }
+
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteUser(@PathVariable Long id){

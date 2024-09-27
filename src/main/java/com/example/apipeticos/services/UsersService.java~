@@ -38,9 +38,7 @@ public class UsersService {
         usersRepository.insertUserTutor(tutorRequest.getFullName(), tutorRequest.getUsername(), tutorRequest.getEmail(), tutorRequest.getBairro(), tutorRequest.getPlan(), tutorRequest.getPhone(), tutorRequest.getGender());
     }
 
-    public void insertUserProfissonal(Users profissionalRequest) {
-        usersRepository.insertUserProfissional(profissionalRequest.getFullName(), profissionalRequest.getUsername(), profissionalRequest.getEmail(), profissionalRequest.getBairro(), profissionalRequest.getPlan(), profissionalRequest.getPhone(), profissionalRequest.getCnpj());
-    }
+    public void insertUser
 
     public Users deleteUser(long id){
         Users user = findbyId(id);

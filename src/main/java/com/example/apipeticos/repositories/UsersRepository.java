@@ -20,4 +20,17 @@ public interface UsersRepository extends JpaRepository<Users, Long> {
             @Param("phone") String phone,
             @Param("gender") String gender
     );
+
+    @Procedure(procedureName = "insert_user_profissional")
+    void insertUserProfissional(
+            @Param("fullName") String fullName,
+            @Param("username") String username,
+            @Param("email") String email,
+            @Param("bairro") String bairro,
+            @Param("plan") String plan,
+            @Param("phone") String phone,
+            @Param("cnpj") String cnpj
+    );
+
+
 }
