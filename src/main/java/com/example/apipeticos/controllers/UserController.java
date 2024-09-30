@@ -45,13 +45,13 @@ public class UserController {
     }
 
     @PostMapping("/insertprofissional")
-    public ResponseEntity<String> inserirProfissional(@Valid @RequestBody Users tutorRequest, BindingResult result) {
+    public ResponseEntity<ApiResponse> inserirProfissional(@Valid @RequestBody Users tutorRequest, BindingResult result) {
         if (result.hasErrors()){
             Map<String, String> erros = validateUser(result);
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(erros.toString());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ApiResponse(erros.toString()));
         }else {
             usersService.insertUserProfissonal(tutorRequest);
-            return ResponseEntity.ok("Usuário inserido com sucesso");
+            return ResponseEntity.ok(new ApiResponse("Usuário inserido com sucesso"));
         }
     }
 
