@@ -2,6 +2,7 @@ package com.example.apipeticos.models;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.Transient;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,6 +26,13 @@ public class PetRegister {
     Long id_race;
     Long id_size;
     Long id_color;
-
+    @Transient
+    String specie;
+    @Transient
+    String race;
+    @Transient
+    String size;
+    @Transient
+    String color;
 
 }
