@@ -30,6 +30,18 @@ public class UserController {
         return usersService.findAll();
     }
 
+
+    @PostMapping("/insert")
+    public ResponseEntity<String> insertUser(@Valid @RequestBody Users users, BindingResult resultado){
+        if (resultado.hasErrors()){
+            Map<String, String> erros = validateUser(resultado);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(erros.toString());
+        }else {
+            usersService.saveUser(users);
+            return ResponseEntity.ok("User inserted with success");
+        }
+    }
+
     @PostMapping("/inserttutor")
     public ResponseEntity<String> inserirUsuario(@Valid @RequestBody Users tutorRequest, BindingResult result) {
 
@@ -54,6 +66,7 @@ public class UserController {
         }
     }
 
+
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteUser(@PathVariable Long id){
         if (usersService.findbyId(id) != null) {
@@ -67,6 +80,7 @@ public class UserController {
     @PutMapping("/update/{id}")
     public ResponseEntity<String> updateUser(@PathVariable long id,
                                                    @Valid @RequestBody Users userUpdated, BindingResult result){
+
         if (result.hasErrors()){
             Map<String, String> erros = validateUser(result);
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(erros.toString());
@@ -83,7 +97,6 @@ public class UserController {
             return ResponseEntity.ok("User updated with success");
         }
     }
-
 
     @PatchMapping ("/partialupdate/{id}")
     public ResponseEntity<String> atualizarParcial(@PathVariable Long id,
