@@ -16,7 +16,7 @@ import lombok.Setter;
 public class PetRegister {
     @Id
     Long idPet;
-    int idUser;
+    Long idUser;
     String nickname;
     int age;
     String sex;

@@ -1,10 +1,11 @@
 package com.example.apipeticos.controllers;
 
+import com.example.apipeticos.models.ApiResponse;
 import com.example.apipeticos.models.PetRegister;
 import com.example.apipeticos.services.PetRegisterService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,4 +24,15 @@ public class PetRegisterController {
     public List<PetRegister> getAll(){
         return petRegisterService.findAll();
     }
+
+
+    @PostMapping("/insert")
+    public ResponseEntity<ApiResponse> inserirUsuario( @RequestBody PetRegister petRegister) {
+
+        petRegisterService.insertPet(petRegister);
+        return ResponseEntity.ok( new ApiResponse("Pet inserido com sucesso"));
+
+    }
+
+
 }

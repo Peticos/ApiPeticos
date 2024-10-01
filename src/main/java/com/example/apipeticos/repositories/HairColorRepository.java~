@@ -1,0 +1,5 @@
+package com.example.apipeticos.repositories;
+
+public interface HairColorRepository extends JpaRepository<HairColor, Long> {
+
+}

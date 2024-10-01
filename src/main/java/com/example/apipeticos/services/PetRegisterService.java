@@ -18,4 +18,18 @@ public class PetRegisterService {
     public List<PetRegister> findAll() {
         return petRegisterRepository.findAll();
     }
+
+    public void insertPet(PetRegister petRegister) {
+        petRegisterRepository.insertPet(
+                petRegister.getIdUser(),
+                petRegister.getNickname(),
+                petRegister.getAge(),
+                petRegister.getSex(),
+                petRegister.getSpecie(),
+                petRegister.getRace(),
+                petRegister.getSize(),
+                petRegister.getColor(),
+                petRegister.getDescription()
+        );
+    }
 }
