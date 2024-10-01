@@ -1,5 +1,6 @@
 package com.example.apipeticos.controllers;
 
+import com.example.apipeticos.models.ApiResponse;
 import com.example.apipeticos.models.Users;
 import com.example.apipeticos.services.UsersService;
 import jakarta.validation.Valid;
@@ -31,14 +32,14 @@ public class UserController {
     }
 
     @PostMapping("/inserttutor")
-    public ResponseEntity<String> inserirUsuario(@Valid @RequestBody Users tutorRequest, BindingResult result) {
+    public ResponseEntity<ApiResponse> inserirUsuario(@Valid @RequestBody Users tutorRequest, BindingResult result) {
 
         if (result.hasErrors()){
             Map<String, String> erros = validateUser(result);
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(erros.toString());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ApiResponse(erros.toString()) );
         }else {
             usersService.insertUser(tutorRequest);
-            return ResponseEntity.ok("Usuário inserido com sucesso");
+            return ResponseEntity.ok( new ApiResponse("Usuário inserido com sucesso"));
         }
 
     }
