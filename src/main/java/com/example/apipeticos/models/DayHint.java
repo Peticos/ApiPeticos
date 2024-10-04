@@ -16,7 +16,7 @@ public class DayHint {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long idHint;
+    Integer idHint;
     @NotNull
     String title;
     @NotNull

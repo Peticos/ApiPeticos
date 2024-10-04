@@ -14,6 +14,6 @@ import lombok.Setter;
 @Setter
 public class HairColor {
     @Id
-    Long id_color;
+    Integer id_color;
     String color;
 }

@@ -16,6 +16,6 @@ import lombok.Setter;
 @Table(name = "Race")
 public class Race {
     @Id
-    Long id_race;
+    Integer id_race;
     String race;
 }

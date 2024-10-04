@@ -56,17 +56,17 @@ public class UserController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<String> deleteUser(@PathVariable Long id){
+    public ResponseEntity<ApiResponse> deleteUser(@PathVariable Integer id){
         if (usersService.findbyId(id) != null) {
             Users deleted = usersService.deleteUser(id);
-            return ResponseEntity.ok("User deleted with sucess : "+deleted);
+            return ResponseEntity.ok(new ApiResponse("User deleted with sucess : "+deleted));
         } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ApiResponse("User not found"));
         }
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<String> updateUser(@PathVariable long id,
+    public ResponseEntity<String> updateUser(@PathVariable Integer id,
                                                    @Valid @RequestBody Users userUpdated, BindingResult result){
         if (result.hasErrors()){
             Map<String, String> erros = validateUser(result);
@@ -87,7 +87,7 @@ public class UserController {
 
 
     @PatchMapping ("/partialupdate/{id}")
-    public ResponseEntity<String> atualizarParcial(@PathVariable Long id,
+    public ResponseEntity<String> atualizarParcial(@PathVariable Integer id,
                                                    @RequestBody Map<String, Object> changes){
 
         Users usersExistente = usersService.findbyId(id);
@@ -113,7 +113,7 @@ public class UserController {
                 user.setCnpj((String) changes.get("cnpj"));
             }
             if (changes.containsKey("idAddress")){
-                user.setIdAddress((Long) changes.get("idAddress"));
+                user.setIdAddress((Integer) changes.get("idAddress"));
             }
 
 
