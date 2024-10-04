@@ -14,6 +14,6 @@ import lombok.Setter;
 @Setter
 public class Size {
     @Id
-    Long id_size;
+    Integer id_size;
     String size;
 }

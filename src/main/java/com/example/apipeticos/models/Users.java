@@ -18,9 +18,9 @@ public class Users {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long idUser;
+    Integer idUser;
 
-    Long idAddress;
+    Integer idAddress;
 
     @NotNull
     @Size( max = 255)
