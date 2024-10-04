@@ -29,7 +29,7 @@ public class UsersService {
         return usersRepository.findByUsername(username);
     }
 
-    public Users findbyId(long id){
+    public Users findbyId(Integer id){
         return usersRepository.findById(id).orElseThrow(() ->
                 new RuntimeException("User not found"));
     }
@@ -42,7 +42,7 @@ public class UsersService {
         usersRepository.insertUserProfissional(profissionalRequest.getFullName(), profissionalRequest.getUsername(), profissionalRequest.getEmail(), profissionalRequest.getBairro(), profissionalRequest.getPlan(), profissionalRequest.getPhone(), profissionalRequest.getCnpj());
     }
 
-    public Users deleteUser(long id){
+    public Users deleteUser(Integer id){
         Users user = findbyId(id);
         usersRepository.delete(user);
         return user;
