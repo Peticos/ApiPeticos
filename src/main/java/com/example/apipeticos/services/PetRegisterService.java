@@ -15,6 +15,10 @@ public class PetRegisterService {
         this.petRegisterRepository = petRegisterRepository;
     }
 
+    public List<PetRegister> findByUsername(String username) {
+        return petRegisterRepository.findPetsByUsername(username);
+    }
+
     public List<PetRegister> findAll() {
         return petRegisterRepository.findAll();
     }
@@ -31,5 +35,13 @@ public class PetRegisterService {
                 petRegister.getColor(),
                 petRegister.getDescription()
         );
+    }
+
+    public void deletePet(Integer id) {
+        petRegisterRepository.deletePet(id);
+    }
+
+    public PetRegister findById(Integer id) {
+        return petRegisterRepository.findById(id).orElseThrow(() -> new RuntimeException("Pet not found"));
     }
 }

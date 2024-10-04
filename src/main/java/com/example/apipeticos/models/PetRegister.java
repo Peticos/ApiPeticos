@@ -15,16 +15,16 @@ import lombok.Setter;
 @Setter
 public class PetRegister {
     @Id
-    Long idPet;
+    Integer idPet;
     int idUser;
     String nickname;
     int age;
     String sex;
     String description;
-    Long idSpecie;
-    Long idRace;
-    Long idSize;
-    Long idColor;
+    Integer idSpecie;
+    Integer idRace;
+    Integer idSize;
+    Integer idColor;
     @Transient
     String specie;
     @Transient
