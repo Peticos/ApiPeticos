@@ -1,2 +1,0 @@
-package com.example.apipeticos.repositories;public interface DayHintRepository {
-}

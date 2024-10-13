@@ -1,7 +1,7 @@
-package com.example.apipeticos.services;
+package com.example.apipeticos.api.services;
 
-import com.example.apipeticos.models.PetRegister;
-import com.example.apipeticos.repositories.PetRegisterRepository;
+import com.example.apipeticos.api.models.PetRegister;
+import com.example.apipeticos.api.repositories.PetRegisterRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,13 +15,17 @@ public class PetRegisterService {
         this.petRegisterRepository = petRegisterRepository;
     }
 
+    public List<PetRegister> findByUsername(String username) {
+        return petRegisterRepository.findPetsByUsername(username);
+    }
+
     public List<PetRegister> findAll() {
         return petRegisterRepository.findAll();
     }
 
     public void insertPet(PetRegister petRegister) {
         petRegisterRepository.insertPet(
-                102,
+                petRegister.getUser(),
                 petRegister.getNickname(),
                 petRegister.getAge(),
                 petRegister.getSex(),
@@ -31,5 +35,13 @@ public class PetRegisterService {
                 petRegister.getColor(),
                 petRegister.getDescription()
         );
+    }
+
+    public void deletePet(Integer id) {
+        petRegisterRepository.deletePet(id);
+    }
+
+    public PetRegister findById(Integer id) {
+        return petRegisterRepository.findById(id).orElseThrow(() -> new RuntimeException("Pet not found"));
     }
 }
