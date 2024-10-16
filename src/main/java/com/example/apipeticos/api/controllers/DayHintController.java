@@ -26,4 +26,10 @@ public class DayHintController {
         return dayHintService.findAll();
     }
 
+    @GetMapping("/random")
+    public List<DayHint> random(){
+        return dayHintService.findRandomDayHints();
+    }
+
+
 }

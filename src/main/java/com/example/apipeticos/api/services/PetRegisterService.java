@@ -40,6 +40,8 @@ public class PetRegisterService {
         petRegisterRepository.deletePet(id);
     }
 
+
+
     public PetRegister findById(Integer id) {
         return petRegisterRepository.findById(id).orElseThrow(() -> new RuntimeException("Pet not found"));
     }
