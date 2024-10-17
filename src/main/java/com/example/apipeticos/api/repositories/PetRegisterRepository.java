@@ -17,7 +17,8 @@ public interface PetRegisterRepository extends JpaRepository<PetRegister, Intege
     void deletePet(@Param("pet_id") Integer idPet);
 
     @Query(value = "SELECT pr.* FROM pet_register pr JOIN user_ u ON pr.id_user = u.id_user WHERE u.username = :username", nativeQuery = true)
-    List<PetRegister> findPetsByUsername(@Param("username") String username);
+    List<PetRegister> findPetsByUserUsername(@Param("username") String username);
+
 
     @Procedure(procedureName = "insert_pet")
     void insertPet(
@@ -25,6 +26,18 @@ public interface PetRegisterRepository extends JpaRepository<PetRegister, Intege
             @Param("nickname") String nickname,
             @Param("age") int age,
             @Param("sex") String sex,
+            @Param("specie") String specie,
+            @Param("race") String race,
+            @Param("size") String size,
+            @Param("color") String color
+    );
+
+    @Procedure(procedureName = "update_pet")
+    void updatePet(
+            @Param("id_pet") int idPet,
+            @Param("nickname_param") String nickname,
+            @Param("age_param") int age,
+            @Param("sex_param") char sex,
             @Param("specie") String specie,
             @Param("race") String race,
             @Param("size") String size,

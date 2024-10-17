@@ -19,9 +19,10 @@ public class RescuedLost {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer id_rescued_lost;
     private Integer idPet;
     private Integer idUser;
+    @Transient
     private String bairro;
     private String title;
     private String description;

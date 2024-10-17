@@ -51,6 +51,8 @@ public class Users {
     @Size( max = 12)
     private String phone;
 
+    @Transient
+    private String usernameId;
 
 
 

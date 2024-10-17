@@ -65,66 +65,30 @@ public class UserController {
         }
     }
 
-    @PutMapping("/update/{id}")
-    public ResponseEntity<String> updateUser(@PathVariable Integer id,
-                                                   @Valid @RequestBody Users userUpdated, BindingResult result){
+    @PutMapping("/updateuser")
+    public ResponseEntity<String> updateUser(
+                                             @Valid @RequestBody Users userUpdated, BindingResult result){
         if (result.hasErrors()){
             Map<String, String> erros = validateUser(result);
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(erros.toString());
         }else {
-            Users user = usersService.findbyId(id);
-            user.setFullName(userUpdated.getFullName());
-            user.setEmail(userUpdated.getEmail());
-            user.setUsername(userUpdated.getUsername());
-            user.setGender(userUpdated.getGender());
-            user.setIdPlan(userUpdated.getIdPlan());
-            user.setIdAddress(userUpdated.getIdAddress());
-            user.setCnpj(userUpdated.getCnpj());
-            usersService.saveUser(user);
+            usersService.updateUser(userUpdated);
             return ResponseEntity.ok("User updated with success");
         }
     }
 
-
-    @PatchMapping ("/partialupdate/{id}")
-    public ResponseEntity<String> atualizarParcial(@PathVariable Integer id,
-                                                   @RequestBody Map<String, Object> changes){
-
-        Users usersExistente = usersService.findbyId(id);
-        if (usersExistente != null){
-            Users user = usersExistente;
-
-            if (changes.containsKey("fullName")){
-                user.setFullName(String.valueOf(changes.get("fullName")));
-            }
-            if (changes.containsKey("email")){
-                user.setEmail(String.valueOf(changes.get("email")));
-            }
-            if (changes.containsKey("username")){
-                user.setUsername(String.valueOf(changes.get("username")));
-            }
-            if (changes.containsKey("gender")){
-                user.setGender(String.valueOf(changes.get("gender")));
-            }
-            if (changes.containsKey("idPlan")){
-                user.setIdPlan((Integer) changes.get("idPlan"));
-            }
-            if (changes.containsKey("cnpj")){
-                user.setCnpj((String) changes.get("cnpj"));
-            }
-            if (changes.containsKey("idAddress")){
-                user.setIdAddress((Integer) changes.get("idAddress"));
-            }
-
-
-
-
-            usersService.saveUser(user);
-
-            return ResponseEntity.ok("Alterado com sucesso");
+    @PutMapping("/updateprofissional")
+    public ResponseEntity<String> updateProfissional(
+            @Valid @RequestBody Users userUpdated, BindingResult result){
+        if (result.hasErrors()){
+            Map<String, String> erros = validateUser(result);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(erros.toString());
+        }else {
+            usersService.updateUserProfissional(userUpdated);
+            return ResponseEntity.ok("User updated with success");
         }
-        return ResponseEntity.notFound().build();
     }
+
 
     @GetMapping("/getbyusername/{username}")
     public Users findByUsername(@PathVariable String username){
