@@ -7,7 +7,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 
+import java.sql.Date;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @AllArgsConstructor
@@ -22,11 +24,12 @@ public class RescuedLost {
     private Integer id_rescued_lost;
     private Integer idPet;
     private Integer idUser;
+    private Integer idAddress;
     @Transient
     private String bairro;
     private String title;
     private String description;
-    private String postTime;
+    private LocalDateTime postTime;
     private String picture;
     private String street;
     private Integer streetNum;

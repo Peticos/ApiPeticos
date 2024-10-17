@@ -28,13 +28,12 @@ public class RescuedLostController {
     }
 
     @PostMapping("/insert")
-    public ResponseEntity<ApiResponse> insert(@Valid RescuedLost rescuedLost, BindingResult result){
+    public ResponseEntity<ApiResponse> insert(@RequestBody RescuedLost rescuedLost, BindingResult result){
         if (result.hasErrors()){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ApiResponse("Entidade Invalida") );
         }else {
             rescuedLostService.insertRescuedLost(rescuedLost);
-            return ResponseEntity.ok( new ApiResponse("Perdido inserido com sucesso"));
+            return ResponseEntity.ok( new ApiResponse("Perdido  inserido com sucesso"));
         }
     }
-
 }

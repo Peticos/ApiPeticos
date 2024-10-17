@@ -4,7 +4,9 @@ import com.example.apipeticos.api.models.RescuedLost;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.query.Procedure;
 
+import java.sql.Date;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 public interface RescuedLostRepository extends JpaRepository<RescuedLost, Integer> {
@@ -16,7 +18,7 @@ public interface RescuedLostRepository extends JpaRepository<RescuedLost, Intege
             String bairro,
             String title,
             String description,
-            String postTime,
+            LocalDateTime postTime,
             String picture,
             String street,
             Integer streetNum,
