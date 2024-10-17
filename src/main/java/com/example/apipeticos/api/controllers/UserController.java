@@ -32,26 +32,26 @@ public class UserController {
     }
 
     @PostMapping("/inserttutor")
-    public ResponseEntity<ApiResponse> inserirUsuario(@Valid @RequestBody Users tutorRequest, BindingResult result) {
+    public Integer inserirUsuario(@Valid @RequestBody Users tutorRequest, BindingResult result) {
 
         if (result.hasErrors()){
             Map<String, String> erros = validateUser(result);
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ApiResponse(erros.toString()) );
+            return -1;
         }else {
             usersService.insertUser(tutorRequest);
-            return ResponseEntity.ok( new ApiResponse("Usuário inserido com sucesso"));
+            return usersService.findByUsername(tutorRequest.getUsername()).getIdUser();
         }
 
     }
 
     @PostMapping("/insertprofissional")
-    public ResponseEntity<ApiResponse> inserirProfissional(@Valid @RequestBody Users tutorRequest, BindingResult result) {
+    public Integer inserirProfissional(@Valid @RequestBody Users tutorRequest, BindingResult result) {
         if (result.hasErrors()){
             Map<String, String> erros = validateUser(result);
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ApiResponse(erros.toString()));
+            return -1;
         }else {
             usersService.insertUserProfissonal(tutorRequest);
-            return ResponseEntity.ok(new ApiResponse("Usuário inserido com sucesso"));
+            return usersService.findByUsername(tutorRequest.getUsername()).getIdUser();
         }
     }
 
