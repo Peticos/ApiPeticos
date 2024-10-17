@@ -90,6 +90,11 @@ public class UserController {
     }
 
 
+    @GetMapping("/findbyid/{id}")
+    public Users findById(@PathVariable Integer id){
+        return usersService.findById(id);
+    }
+
     @GetMapping("/getbyusername/{username}")
     public Users findByUsername(@PathVariable String username){
         return usersService.findByUsername(username);

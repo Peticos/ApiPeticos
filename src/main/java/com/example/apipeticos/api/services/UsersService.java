@@ -20,6 +20,10 @@ public class UsersService {
         return usersRepository.findAll();
     }
 
+    public Users findById(Integer id){
+        return usersRepository.findById(id).orElseThrow();
+    }
+
     @Transactional
     public Users saveUser(Users user){
         return usersRepository.save(user);
