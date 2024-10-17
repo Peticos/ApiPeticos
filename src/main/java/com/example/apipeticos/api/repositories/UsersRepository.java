@@ -32,5 +32,26 @@ public interface UsersRepository extends JpaRepository<Users, Integer> {
             @Param("cnpj") String cnpj
     );
 
+    @Procedure(procedureName = "update_user_tutor")
+    void updateUserTutor(
+            @Param("fullname") String fullName,
+            @Param("username_id") String usernameId,
+            @Param("username") String username,
+            @Param("email") String email,
+            @Param("bairro") String bairro,
+            @Param("phone") String phone,
+            @Param("gender") String gender
+    );
+
+    @Procedure(procedureName = "update_user_profissional")
+    void updateUserProfissional(
+            @Param("fullname") String fullName,
+            @Param("username_id") String usernameId,
+            @Param("username") String username,
+            @Param("email") String email,
+            @Param("bairro") String bairro,
+            @Param("phone") String phone,
+            @Param("cnpj") String cnpj
+    );
 
 }

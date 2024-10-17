@@ -15,8 +15,8 @@ public class PetRegisterService {
         this.petRegisterRepository = petRegisterRepository;
     }
 
-    public List<PetRegister> findByUsername(String username) {
-        return petRegisterRepository.findPetsByUsername(username);
+    public List<PetRegister> findByUserUsername(String username) {
+        return petRegisterRepository.findPetsByUserUsername(username);
     }
 
     public List<PetRegister> findAll() {
@@ -24,7 +24,7 @@ public class PetRegisterService {
     }
 
     public void insertPet(PetRegister petRegister) {
-        petRegisterRepository.insertPet(
+         petRegisterRepository.insertPet(
                 petRegister.getUser(),
                 petRegister.getNickname(),
                 petRegister.getAge(),

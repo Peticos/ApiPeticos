@@ -26,17 +26,16 @@ public class PetRegisterController {
         return petRegisterService.findAll();
     }
 
-
     @PostMapping("/insert")
     public ResponseEntity<ApiResponse> inserirUsuario( @RequestBody PetRegister petRegister) {
-
         petRegisterService.insertPet(petRegister);
+
         return ResponseEntity.ok( new ApiResponse("Pet inserido com sucesso"));
 
     }
     @GetMapping("/getbyusername/{username}")
-    public List<PetRegister> findByUsername(@PathVariable String username){
-        return petRegisterService.findByUsername(username);
+    public List<PetRegister> findByUserUsername(@PathVariable String username){
+        return petRegisterService.findByUserUsername(username);
     }
 
     @DeleteMapping("/deletebyid/{id}")
@@ -49,6 +48,8 @@ public class PetRegisterController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ApiResponse("Pet not found"));
         }
     }
+
+
 
 
 }
