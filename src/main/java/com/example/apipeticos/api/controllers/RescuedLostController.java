@@ -36,4 +36,5 @@ public class RescuedLostController {
             return ResponseEntity.ok( new ApiResponse("Perdido inserido com sucesso"));
         }
     }
+
 }
