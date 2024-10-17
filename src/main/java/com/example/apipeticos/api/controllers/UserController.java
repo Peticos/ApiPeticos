@@ -66,26 +66,26 @@ public class UserController {
     }
 
     @PutMapping("/updateuser")
-    public ResponseEntity<String> updateUser(
+    public ResponseEntity<ApiResponse> updateUser(
                                              @Valid @RequestBody Users userUpdated, BindingResult result){
         if (result.hasErrors()){
             Map<String, String> erros = validateUser(result);
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(erros.toString());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ApiResponse(erros.toString()));
         }else {
             usersService.updateUser(userUpdated);
-            return ResponseEntity.ok("User updated with success");
+            return ResponseEntity.ok(new ApiResponse("Usuario atualizado com sucesso"));
         }
     }
 
     @PutMapping("/updateprofissional")
-    public ResponseEntity<String> updateProfissional(
+    public ResponseEntity<ApiResponse> updateProfissional(
             @Valid @RequestBody Users userUpdated, BindingResult result){
         if (result.hasErrors()){
             Map<String, String> erros = validateUser(result);
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(erros.toString());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ApiResponse(erros.toString()));
         }else {
             usersService.updateUserProfissional(userUpdated);
-            return ResponseEntity.ok("User updated with success");
+            return ResponseEntity.ok(new ApiResponse("Usuario atualizado com sucess"));
         }
     }
 

@@ -24,4 +24,5 @@ public class RescuedLostService {
     public List<RescuedLost> findAll(){
         return rescuedLostRepository.findAll();
     }
+
 }
