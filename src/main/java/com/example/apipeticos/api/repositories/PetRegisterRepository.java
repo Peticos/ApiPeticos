@@ -19,6 +19,8 @@ public interface PetRegisterRepository extends JpaRepository<PetRegister, Intege
     @Query(value = "SELECT pr.* FROM pet_register pr JOIN user_ u ON pr.id_user = u.id_user WHERE u.username = :username", nativeQuery = true)
     List<PetRegister> findPetsByUserUsername(@Param("username") String username);
 
+    @Query("SELECT pr.nickname FROM PetRegister pr WHERE pr.idPet IN :ids")
+    List<String> findNicknamesByIds(List<Integer> ids);
 
     @Procedure(procedureName = "insert_pet")
     void insertPet(

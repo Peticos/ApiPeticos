@@ -49,6 +49,11 @@ public class PetRegisterController {
         }
     }
 
+    @GetMapping("/nicknames")
+    public List<String> getNicknamesByPetIds(@RequestParam List<Integer> ids) {
+        return petRegisterService.findNicknamesById(ids);
+    }
+
 
 
 

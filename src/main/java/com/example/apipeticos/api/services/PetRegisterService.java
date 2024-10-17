@@ -40,6 +40,10 @@ public class PetRegisterService {
         petRegisterRepository.deletePet(id);
     }
 
+    public List<String> findNicknamesById(List<Integer> ids){
+        return petRegisterRepository.findNicknamesByIds(ids);
+    }
+
 
 
     public PetRegister findById(Integer id) {
