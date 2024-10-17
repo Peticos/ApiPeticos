@@ -19,7 +19,7 @@ public class PetRegister {
     int idUser;
     String nickname;
     int age;
-    String sex;
+    Character sex;
     Integer idSpecie;
     Integer idRace;
     Integer idSize;

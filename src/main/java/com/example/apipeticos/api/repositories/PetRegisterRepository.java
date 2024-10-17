@@ -27,7 +27,7 @@ public interface PetRegisterRepository extends JpaRepository<PetRegister, Intege
             @Param("username") String user,
             @Param("nickname") String nickname,
             @Param("age") int age,
-            @Param("sex") String sex,
+            @Param("sex") Character sex,
             @Param("specie") String specie,
             @Param("race") String race,
             @Param("size") String size,

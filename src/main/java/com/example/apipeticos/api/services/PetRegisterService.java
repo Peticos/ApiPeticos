@@ -44,9 +44,12 @@ public class PetRegisterService {
         return petRegisterRepository.findNicknamesByIds(ids);
     }
 
-
-
     public PetRegister findById(Integer id) {
         return petRegisterRepository.findById(id).orElseThrow(() -> new RuntimeException("Pet not found"));
     }
+
+    public void updatePet(PetRegister petRegister){
+        petRegisterRepository.updatePet(petRegister.getIdPet(), petRegister.getNickname(), petRegister.getAge(), petRegister.getSex(), petRegister.getSpecie(), petRegister.getRace(), petRegister.getSize(), petRegister.getColor());
+    }
+
 }
