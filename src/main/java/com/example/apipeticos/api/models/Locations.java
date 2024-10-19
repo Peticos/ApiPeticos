@@ -23,6 +23,8 @@ public class Locations {
     private String localName;
     private String localPicture;
     private String street;
+    private String city;
+    private String neighborhood;
     private Integer streetNum;
     private String description;
     private String linkKnowMore;
