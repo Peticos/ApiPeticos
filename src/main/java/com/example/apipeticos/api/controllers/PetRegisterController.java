@@ -24,11 +24,6 @@ public class PetRegisterController {
     }
 
 
-    @GetMapping("/getall")
-    public List<PetRegister> getAll(){
-        return petRegisterService.findAll();
-    }
-
     @PostMapping("/insert")
     public ResponseEntity<ApiResponse> inserirUsuario( @RequestBody PetRegister petRegister) {
         petRegisterService.insertPet(petRegister);

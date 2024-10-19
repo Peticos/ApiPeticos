@@ -20,8 +20,6 @@ public class Users {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer idUser;
 
-    Integer idAddress;
-
     @NotNull
     @Size( max = 255)
     String fullName;
@@ -36,23 +34,22 @@ public class Users {
 
     String gender;
 
-    int idPlan;
-
     @Size(min = 5, max = 14)
     String cnpj;
 
-    @Transient
-    private String Plan;
 
-    @Transient
+    @Column(name="plan_type")
+    private String Plan;
+    @Column(name="neighborhood")
     private String bairro;
 
-    @Transient
+
     @Size( max = 12)
     private String phone;
 
     @Transient
     private String usernameId;
+    private String profilePicture;
 
 
 
@@ -60,12 +57,10 @@ public class Users {
     public String toString() {
         return "Users { " +
                 "idUser= " + idUser +
-                ", idAddress= " + idAddress +
                 ", fullName= '" + fullName + '\'' +
                 ", username= '" + username + '\'' +
                 ", email= '" + email + '\'' +
                 ", gender= '" + gender + '\'' +
-                ", idPlan= " + idPlan +
                 ", cnpj= " + cnpj +
                 " }";
     }

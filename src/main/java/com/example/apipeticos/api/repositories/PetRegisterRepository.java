@@ -16,7 +16,7 @@ public interface PetRegisterRepository extends JpaRepository<PetRegister, Intege
     @Procedure(procedureName = "delete_pet")
     void deletePet(@Param("pet_id") Integer idPet);
 
-    @Query(value = "SELECT pr.* FROM pet_register pr JOIN user_ u ON pr.id_user = u.id_user WHERE u.username = :username", nativeQuery = true)
+    @Query(value = "SELECT * FROM select_pet()", nativeQuery = true)
     List<PetRegister> findPetsByUserUsername(@Param("username") String username);
 
     @Query("SELECT pr.nickname FROM PetRegister pr WHERE pr.idPet IN :ids")

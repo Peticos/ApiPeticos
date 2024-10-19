@@ -26,10 +26,6 @@ public class UserController {
         this.usersService = usersService;
     }
 
-    @GetMapping("/getall")
-    public List<Users> getAll(){
-        return usersService.findAll();
-    }
 
     @PostMapping("/inserttutor")
     public Integer inserirUsuario(@Valid @RequestBody Users tutorRequest, BindingResult result) {
