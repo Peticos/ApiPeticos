@@ -20,24 +20,15 @@ public class UsersService {
         return usersRepository.findAll();
     }
 
-    public Users findById(Integer id){
-        return usersRepository.findById(id).orElseThrow();
-    }
-
-    @Transactional
-    public Users saveUser(Users user){
-        return usersRepository.save(user);
-    }
-
     public Users findByUsername(String username){
         return usersRepository.findByUsername(username);
     }
 
     public Users findbyId(Integer id){
-        return usersRepository.findById(id).orElseThrow(() ->
-                new RuntimeException("User not found"));
+        return usersRepository.findById(id).orElseThrow();
     }
 
+    @Transactional
     public void insertUser(Users tutorRequest) {
         usersRepository.insertUserTutor(tutorRequest.getFullName(), tutorRequest.getUsername(), tutorRequest.getEmail(), tutorRequest.getBairro(), tutorRequest.getPlan(), tutorRequest.getPhone(), tutorRequest.getGender(), tutorRequest.getProfilePicture());
     }
