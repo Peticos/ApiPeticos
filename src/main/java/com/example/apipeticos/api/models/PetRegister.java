@@ -20,17 +20,9 @@ public class PetRegister {
     String nickname;
     int age;
     Character sex;
-    Integer idSpecie;
-    Integer idRace;
-    Integer idSize;
-    Integer idColor;
-    @Transient
     String specie;
-    @Transient
     String race;
-    @Transient
     String size;
-    @Transient
     String color;
 
     @Transient

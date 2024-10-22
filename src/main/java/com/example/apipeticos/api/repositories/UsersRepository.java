@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.jpa.repository.query.Procedure;
 import org.springframework.data.repository.query.Param;
 
-import java.util.List;
+import java.util.Optional;
 
 
 public interface UsersRepository extends JpaRepository<Users, Integer> {
@@ -16,6 +16,9 @@ public interface UsersRepository extends JpaRepository<Users, Integer> {
     void deleteByUsername(String username_param);
     @Query(value = "SELECT * FROM select_user(CAST(:username_param AS varchar))", nativeQuery = true)
     Users findByUsername(@Param("username_param") String username);
+
+    @Query(value = "SELECT * FROM select_user(:id)", nativeQuery = true)
+    Optional<Users> findById(@Param("id") Integer id);
 
     @Procedure(procedureName = "insert_user_tutor")
     void insertUserTutor(

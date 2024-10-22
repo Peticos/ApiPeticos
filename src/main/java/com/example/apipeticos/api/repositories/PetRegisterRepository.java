@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.query.Procedure;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface PetRegisterRepository extends JpaRepository<PetRegister, Integer> {
 
@@ -16,8 +17,12 @@ public interface PetRegisterRepository extends JpaRepository<PetRegister, Intege
     @Procedure(procedureName = "delete_pet")
     void deletePet(@Param("pet_id") Integer idPet);
 
-    @Query(value = "SELECT * FROM select_pet()", nativeQuery = true)
+    @Query(value = "SELECT * FROM select_pet(:username)", nativeQuery = true)
     List<PetRegister> findPetsByUserUsername(@Param("username") String username);
+
+    @Query(value = "SELECT * FROM select_pet(:id)", nativeQuery = true)
+    Optional<PetRegister> findById(@Param("id") Integer id);
+
 
     @Query("SELECT pr.nickname FROM PetRegister pr WHERE pr.idPet IN :ids")
     List<String> findNicknamesByIds(List<Integer> ids);
