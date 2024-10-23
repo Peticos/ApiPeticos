@@ -41,11 +41,11 @@ public class RescuedLostController {
     }
 
     @GetMapping("/findbyid/{id}")
-    public  RescuedLost findById(@PathVariable Integer id){
+    public  List<RescuedLost> findById(@PathVariable Integer id){
         return rescuedLostService.findById(id);
     }
 
-    @PutMapping("/findpet/{id}/rescued-date")
+    @PutMapping("/findpet/{id}")
     public ResponseEntity<ApiResponse> updateRescuedDate(@PathVariable Integer id,@RequestParam("rescuedDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate rescuedDate) {
         rescuedLostService.findPet(id, rescuedDate);
         return ResponseEntity.ok(new ApiResponse("Pet Achado!"));

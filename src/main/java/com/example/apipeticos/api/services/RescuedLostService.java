@@ -28,8 +28,8 @@ public class RescuedLostService {
         return rescuedLostRepository.findAll();
     }
 
-    public RescuedLost findById(Integer id){
-        return rescuedLostRepository.findById(id).orElseThrow();
+    public List<RescuedLost> findById(Integer id){
+        return rescuedLostRepository.findByIdUser(id);
     }
 
     public void findPet(Integer id, LocalDate rescuedDate) {
