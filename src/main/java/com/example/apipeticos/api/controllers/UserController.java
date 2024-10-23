@@ -4,6 +4,7 @@ import com.example.apipeticos.api.models.ApiResponse;
 import com.example.apipeticos.api.models.Users;
 import com.example.apipeticos.api.services.UsersService;
 import jakarta.validation.Valid;
+import org.apache.coyote.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -41,13 +42,18 @@ public class UserController {
     }
 
     @PostMapping("/insertprofissional")
-    public Integer inserirProfissional(@Valid @RequestBody Users tutorRequest, BindingResult result) {
-        if (result.hasErrors()){
+    public ResponseEntity<?> inserirProfissional(@Valid @RequestBody Users tutorRequest, BindingResult result) {
+        if (result.hasErrors()) {
             Map<String, String> erros = validateUser(result);
-            return -1;
-        }else {
-            usersService.insertUserProfissonal(tutorRequest);
-            return usersService.findByUsername(tutorRequest.getUsername()).getIdUser();
+            return ResponseEntity.badRequest().body(erros); // Retorna erros de validação
+        } else {
+            try {
+                usersService.insertUserProfissonal(tutorRequest);
+                Integer idUsuario = usersService.findByUsername(tutorRequest.getUsername()).getIdUser();
+                return ResponseEntity.badRequest().body(idUsuario); // Retorna o ID do usuário inserido
+            } catch (Exception e) {
+                return ResponseEntity.badRequest().body(e.toString()); // Retorna mensagem genérica
+            }
         }
     }
 

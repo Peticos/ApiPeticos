@@ -2,9 +2,11 @@ package com.example.apipeticos.api.controllers;
 
 import com.example.apipeticos.api.models.ApiResponse;
 import com.example.apipeticos.api.models.PetRegister;
+import com.example.apipeticos.api.models.Users;
 import com.example.apipeticos.api.services.PetRegisterService;
 
 import jakarta.validation.Valid;
+import org.apache.catalina.User;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -21,6 +23,12 @@ public class PetRegisterController {
 
     public PetRegisterController(PetRegisterService petRegisterService) {
         this.petRegisterService = petRegisterService;
+    }
+
+    @GetMapping("/findbyid/{id}")
+    public PetRegister findById(@PathVariable Integer id){
+
+        return petRegisterService.findById(id);
     }
 
 

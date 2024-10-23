@@ -7,11 +7,14 @@ import com.example.apipeticos.api.models.Users;
 import com.example.apipeticos.api.services.RescuedLostService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
@@ -35,5 +38,16 @@ public class RescuedLostController {
             rescuedLostService.insertRescuedLost(rescuedLost);
             return ResponseEntity.ok( new ApiResponse("Perdido  inserido com sucesso"));
         }
+    }
+
+    @GetMapping("/findbyid/{id}")
+    public  RescuedLost findById(@PathVariable Integer id){
+        return rescuedLostService.findById(id);
+    }
+
+    @PutMapping("/findpet/{id}/rescued-date")
+    public ResponseEntity<ApiResponse> updateRescuedDate(@PathVariable Integer id,@RequestParam("rescuedDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate rescuedDate) {
+        rescuedLostService.findPet(id, rescuedDate);
+        return ResponseEntity.ok(new ApiResponse("Pet Achado!"));
     }
 }

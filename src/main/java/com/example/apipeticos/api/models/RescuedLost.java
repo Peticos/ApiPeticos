@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 
-import java.sql.Date;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -24,16 +23,16 @@ public class RescuedLost {
     private Integer id_rescued_lost;
     private Integer idPet;
     private Integer idUser;
-    private Integer idAddress;
-    @Transient
+    @Column(name = "neighborhood")
     private String bairro;
     private String title;
     private String description;
     private LocalDateTime postTime;
     private String picture;
-    private String street;
-    private Integer streetNum;
+    private String location;
     private LocalDate lostDate;
+    private String phone;
+    private LocalDate rescuedDate;
 
 }
 

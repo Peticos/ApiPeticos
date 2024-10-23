@@ -3,6 +3,7 @@ package com.example.apipeticos.api.repositories;
 
 import com.example.apipeticos.api.models.PetRegister;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.jpa.repository.query.Procedure;
 import org.springframework.data.repository.query.Param;
@@ -27,11 +28,11 @@ public interface PetRegisterRepository extends JpaRepository<PetRegister, Intege
     @Query("SELECT pr.nickname FROM PetRegister pr WHERE pr.idPet IN :ids")
     List<String> findNicknamesByIds(List<Integer> ids);
 
-    @Procedure(procedureName = "insert_pet")
-    void insertPet(
-            @Param("username") String user,
+    @Query(value = "SELECT insert_pet(:username, :nickname, :age, :sex, :specie, :race, :size, :color)", nativeQuery = true)
+    Integer insertPet(
+            @Param("username") String username,
             @Param("nickname") String nickname,
-            @Param("age") int age,
+            @Param("age") Integer age,
             @Param("sex") Character sex,
             @Param("specie") String specie,
             @Param("race") String race,
@@ -39,12 +40,13 @@ public interface PetRegisterRepository extends JpaRepository<PetRegister, Intege
             @Param("color") String color
     );
 
-    @Procedure(procedureName = "update_pet")
+    @Modifying
+    @Query(value = "CALL update_pet(:idPet, :nickname, :age, :sex, :specie, :race, :size, :color)", nativeQuery = true)
     void updatePet(
-            @Param("id_pet") int idPet,
-            @Param("nickname_param") String nickname,
-            @Param("age_param") int age,
-            @Param("sex_param") char sex,
+            @Param("idPet") Integer idPet,
+            @Param("nickname") String nickname,
+            @Param("age") Integer age,
+            @Param("sex") Character sex,
             @Param("specie") String specie,
             @Param("race") String race,
             @Param("size") String size,
