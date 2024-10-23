@@ -36,5 +36,5 @@ public interface RescuedLostRepository extends JpaRepository<RescuedLost, Intege
     List<RescuedLost> findAll();
 
     @Query(value = "SELECT * FROM select_rescued_lost(:id)", nativeQuery = true)
-    Optional<RescuedLost> findByIdUser(Integer id);
+    List<RescuedLost> findByIdUser(Integer id);
 }
