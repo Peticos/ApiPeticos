@@ -23,8 +23,8 @@ public class PetRegisterService {
         return petRegisterRepository.findAll();
     }
 
-    public void insertPet(PetRegister petRegister) {
-         petRegisterRepository.insertPet(
+    public  Integer insertPet(PetRegister petRegister) {
+         return petRegisterRepository.insertPet(
                 petRegister.getUser(),
                 petRegister.getNickname(),
                 petRegister.getAge(),

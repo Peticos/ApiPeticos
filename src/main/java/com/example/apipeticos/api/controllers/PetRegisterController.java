@@ -32,10 +32,8 @@ public class PetRegisterController {
 
 
     @PostMapping("/insert")
-    public ResponseEntity<ApiResponse> inserirUsuario( @RequestBody PetRegister petRegister) {
-        petRegisterService.insertPet(petRegister);
-
-        return ResponseEntity.ok( new ApiResponse("Pet inserido com sucesso"));
+    public Integer inserirUsuario( @RequestBody PetRegister petRegister) {
+        return petRegisterService.insertPet(petRegister);
 
     }
     @GetMapping("/getbyusername/{username}")
