@@ -14,6 +14,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
@@ -46,7 +47,7 @@ public class RescuedLostController {
     }
 
     @PutMapping("/findpet/{id}")
-    public ResponseEntity<ApiResponse> updateRescuedDate(@PathVariable Integer id,@RequestParam("rescuedDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate rescuedDate) {
+    public ResponseEntity<ApiResponse> updateRescuedDate(@PathVariable Integer id,@RequestParam("rescuedDate") Date rescuedDate) {
         rescuedLostService.findPet(id, rescuedDate);
         return ResponseEntity.ok(new ApiResponse("Pet Achado!"));
     }
