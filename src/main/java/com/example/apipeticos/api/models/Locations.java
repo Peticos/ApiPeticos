@@ -28,5 +28,6 @@ public class Locations {
     private Integer streetNum;
     private String description;
     private String linkKnowMore;
+    private String phone;
 
 }
