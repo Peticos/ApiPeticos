@@ -10,6 +10,8 @@ import org.springframework.data.jpa.repository.query.Procedure;
 import org.springframework.data.repository.query.Param;
 
 
+import java.sql.Date;
+import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -37,4 +39,8 @@ public interface RescuedLostRepository extends JpaRepository<RescuedLost, Intege
 
     @Query(value = "SELECT * FROM select_rescued_lost(:id)", nativeQuery = true)
     List<RescuedLost> findByIdUser(Integer id);
+
+    @Procedure(name = "update_rescued")
+    void update_rescued(@Param("rescued_date_param") Date rescuedDate, @Param("id_pet_param") Integer idPet);
+
 }

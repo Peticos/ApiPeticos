@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -32,15 +33,9 @@ public class RescuedLostService {
         return rescuedLostRepository.findByIdUser(id);
     }
 
-    public void findPet(Integer id, LocalDate rescuedDate) {
-        Optional<RescuedLost> rescuedLostOptional = rescuedLostRepository.findById(id);
+    public void findPet(Integer id, Date rescuedDate) {
 
-        if (rescuedLostOptional.isPresent()) {
-            RescuedLost rescuedLost = rescuedLostOptional.get();
-            rescuedLost.setRescuedDate(rescuedDate);
-            rescuedLostRepository.save(rescuedLost);
-        } else {
-            throw new RuntimeException("Registro não encontrado com o ID: " + id);
-        }
+            rescuedLostRepository.update_rescued(rescuedDate, id);
+
     }
 }
