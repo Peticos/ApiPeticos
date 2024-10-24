@@ -35,7 +35,7 @@ public class RescuedLostService {
 
     public void findPet(Integer id, Date rescuedDate) {
 
-            rescuedLostRepository.find(rescuedDate, id);
+            rescuedLostRepository.update_rescued(rescuedDate, id);
 
     }
 }

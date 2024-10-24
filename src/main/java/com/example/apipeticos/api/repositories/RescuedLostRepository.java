@@ -41,6 +41,6 @@ public interface RescuedLostRepository extends JpaRepository<RescuedLost, Intege
     List<RescuedLost> findByIdUser(Integer id);
 
     @Procedure(name = "update_rescued")
-    void find(@Param("rescued_date_param") Date rescuedDate, @Param("id_pet_param") Integer idPet);
+    void update_rescued(@Param("rescued_date_param") Date rescuedDate, @Param("id_pet_param") Integer idPet);
 
 }
