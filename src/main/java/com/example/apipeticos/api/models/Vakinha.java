@@ -28,6 +28,6 @@ public class Vakinha {
     Double totalPercentage;
     String description;
     String image;
-    Date initalDate;
+    Date initialDate;
     Date endDate;
 }
