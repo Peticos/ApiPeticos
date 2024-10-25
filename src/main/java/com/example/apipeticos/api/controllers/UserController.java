@@ -50,7 +50,7 @@ public class UserController {
             try {
                 usersService.insertUserProfissonal(tutorRequest);
                 Integer idUsuario = usersService.findByUsername(tutorRequest.getUsername()).getIdUser();
-                return ResponseEntity.badRequest().body(idUsuario); // Retorna o ID do usuário inserido
+                return ResponseEntity.ok(idUsuario); // Retorna o ID do usuário inserido
             } catch (Exception e) {
                 return ResponseEntity.badRequest().body(e.toString()); // Retorna mensagem genérica
             }
