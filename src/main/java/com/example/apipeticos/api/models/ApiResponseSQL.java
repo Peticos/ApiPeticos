@@ -1,10 +1,10 @@
 package com.example.apipeticos.api.models;
 
-public class ApiResponse {
+public class ApiResponseSQL {
 
     private String message;
 
-    public ApiResponse(String message) {
+    public ApiResponseSQL(String message) {
         this.message = message;
     }
 

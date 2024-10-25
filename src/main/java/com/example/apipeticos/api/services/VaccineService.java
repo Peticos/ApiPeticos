@@ -22,4 +22,9 @@ public class VaccineService {
     public List<Vaccine> findByIdPet(Integer id){
         return vaccineRepository.getVaccineByIdPet(id);
     }
+
+    public Integer insertVaccine(Vaccine vaccine){
+        vaccineRepository.save(vaccine);
+        return vaccine.getIdVaccine();
+    }
 }
