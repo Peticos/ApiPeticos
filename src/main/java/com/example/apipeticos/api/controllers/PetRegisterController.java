@@ -1,12 +1,10 @@
 package com.example.apipeticos.api.controllers;
 
-import com.example.apipeticos.api.models.ApiResponse;
+import com.example.apipeticos.api.models.ApiResponseSQL;
 import com.example.apipeticos.api.models.PetRegister;
-import com.example.apipeticos.api.models.Users;
 import com.example.apipeticos.api.services.PetRegisterService;
 
 import jakarta.validation.Valid;
-import org.apache.catalina.User;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -42,13 +40,13 @@ public class PetRegisterController {
     }
 
     @DeleteMapping("/deletebyid/{id}")
-    public ResponseEntity<ApiResponse> deleteById(@PathVariable Integer id){
+    public ResponseEntity<ApiResponseSQL> deleteById(@PathVariable Integer id){
 
         if (petRegisterService.findById(id) != null) {
             petRegisterService.deletePet(id);
-            return ResponseEntity.ok(new ApiResponse("Pet deleted with sucess "));
+            return ResponseEntity.ok(new ApiResponseSQL("Pet deleted with sucess "));
         } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ApiResponse("Pet not found"));
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ApiResponseSQL("Pet not found"));
         }
     }
 
@@ -58,12 +56,12 @@ public class PetRegisterController {
     }
 
     @PostMapping("/update")
-    public ResponseEntity<ApiResponse> updatePet(@Valid @RequestBody PetRegister petRegister, BindingResult result){
+    public ResponseEntity<ApiResponseSQL> updatePet(@Valid @RequestBody PetRegister petRegister, BindingResult result){
         if (result.hasErrors()){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ApiResponse("Erro ao atualizar"));
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ApiResponseSQL("Erro ao atualizar"));
         }else {
             petRegisterService.updatePet(petRegister);
-            return ResponseEntity.ok(new ApiResponse("Atualizado com sucesso"));
+            return ResponseEntity.ok(new ApiResponseSQL("Atualizado com sucesso"));
         }
     }
 

@@ -1,8 +1,6 @@
 package com.example.apipeticos.api.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,6 +16,7 @@ import java.sql.Date;
 public class Vakinha {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // or GenerationType.AUTO
     Integer idVakinha;
     Integer idPet;
     String title;

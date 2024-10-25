@@ -1,6 +1,6 @@
 package com.example.apipeticos.api.controllers;
 
-import com.example.apipeticos.api.models.ApiResponse;
+import com.example.apipeticos.api.models.ApiResponseSQL;
 import com.example.apipeticos.api.models.Weight;
 import com.example.apipeticos.api.services.WeightService;
 import org.springframework.http.ResponseEntity;
@@ -20,13 +20,13 @@ public class WeightController {
     }
 
     @PostMapping("/insert")
-    public ResponseEntity<ApiResponse> insert(@RequestBody Weight weight){
+    public ResponseEntity<ApiResponseSQL> insert(@RequestBody Weight weight){
 
         try{
             weightService.insert(weight);
-            return ResponseEntity.ok( new ApiResponse("Peso inserido com sucesso") );
+            return ResponseEntity.ok( new ApiResponseSQL("Peso inserido com sucesso") );
         }catch (Exception e){
-            return ResponseEntity.internalServerError().body(new ApiResponse(""));
+            return ResponseEntity.internalServerError().body(new ApiResponseSQL(""));
         }
     }
 }

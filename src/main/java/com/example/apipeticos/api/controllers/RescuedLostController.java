@@ -1,23 +1,17 @@
 package com.example.apipeticos.api.controllers;
 
 
-import com.example.apipeticos.api.models.ApiResponse;
+import com.example.apipeticos.api.models.ApiResponseSQL;
 import com.example.apipeticos.api.models.RescuedLost;
-import com.example.apipeticos.api.models.Users;
 import com.example.apipeticos.api.services.RescuedLostService;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
-import java.sql.Timestamp;
-import java.time.LocalDate;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/api/rescuedlost")
@@ -32,12 +26,12 @@ public class RescuedLostController {
     }
 
     @PostMapping("/insert")
-    public ResponseEntity<ApiResponse> insert(@RequestBody RescuedLost rescuedLost, BindingResult result){
+    public ResponseEntity<ApiResponseSQL> insert(@RequestBody RescuedLost rescuedLost, BindingResult result){
         if (result.hasErrors()){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ApiResponse("Entidade Invalida") );
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ApiResponseSQL("Entidade Invalida") );
         }else {
             rescuedLostService.insertRescuedLost(rescuedLost);
-            return ResponseEntity.ok( new ApiResponse("Perdido  inserido com sucesso"));
+            return ResponseEntity.ok( new ApiResponseSQL("Perdido  inserido com sucesso"));
         }
     }
 
@@ -47,8 +41,8 @@ public class RescuedLostController {
     }
 
     @PutMapping("/findpet/{id}")
-    public ResponseEntity<ApiResponse> updateRescuedDate(@PathVariable Integer id,@RequestParam("rescuedDate") Date rescuedDate) {
+    public ResponseEntity<ApiResponseSQL> updateRescuedDate(@PathVariable Integer id, @RequestParam("rescuedDate") Date rescuedDate) {
         rescuedLostService.findPet(id, rescuedDate);
-        return ResponseEntity.ok(new ApiResponse("Pet Achado!"));
+        return ResponseEntity.ok(new ApiResponseSQL("Pet Achado!"));
     }
 }

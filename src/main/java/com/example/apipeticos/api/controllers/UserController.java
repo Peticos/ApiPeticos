@@ -1,10 +1,9 @@
 package com.example.apipeticos.api.controllers;
 
-import com.example.apipeticos.api.models.ApiResponse;
+import com.example.apipeticos.api.models.ApiResponseSQL;
 import com.example.apipeticos.api.models.Users;
 import com.example.apipeticos.api.services.UsersService;
 import jakarta.validation.Valid;
-import org.apache.coyote.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +12,6 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -58,36 +56,36 @@ public class UserController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<ApiResponse> deleteUser(@PathVariable Integer id){
+    public ResponseEntity<ApiResponseSQL> deleteUser(@PathVariable Integer id){
         if (usersService.findbyId(id) != null) {
             Users deleted = usersService.deleteUser(id);
-            return ResponseEntity.ok(new ApiResponse("User deleted with sucess : "+deleted));
+            return ResponseEntity.ok(new ApiResponseSQL("User deleted with sucess : "+deleted));
         } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ApiResponse("User not found"));
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ApiResponseSQL("User not found"));
         }
     }
 
     @PutMapping("/updateuser")
-    public ResponseEntity<ApiResponse> updateUser(
+    public ResponseEntity<ApiResponseSQL> updateUser(
                                              @Valid @RequestBody Users userUpdated, BindingResult result){
         if (result.hasErrors()){
             Map<String, String> erros = validateUser(result);
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ApiResponse(erros.toString()));
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ApiResponseSQL(erros.toString()));
         }else {
             usersService.updateUser(userUpdated);
-            return ResponseEntity.ok(new ApiResponse("Usuario atualizado com sucesso"));
+            return ResponseEntity.ok(new ApiResponseSQL("Usuario atualizado com sucesso"));
         }
     }
 
     @PutMapping("/updateprofissional")
-    public ResponseEntity<ApiResponse> updateProfissional(
+    public ResponseEntity<ApiResponseSQL> updateProfissional(
             @Valid @RequestBody Users userUpdated, BindingResult result){
         if (result.hasErrors()){
             Map<String, String> erros = validateUser(result);
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ApiResponse(erros.toString()));
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ApiResponseSQL(erros.toString()));
         }else {
             usersService.updateUserProfissional(userUpdated);
-            return ResponseEntity.ok(new ApiResponse("Usuario atualizado com sucess"));
+            return ResponseEntity.ok(new ApiResponseSQL("Usuario atualizado com sucess"));
         }
     }
 
