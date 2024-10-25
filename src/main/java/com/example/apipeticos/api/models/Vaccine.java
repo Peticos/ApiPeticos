@@ -22,9 +22,9 @@ public class Vaccine {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // or GenerationType.AUTO
-    @Schema(description = "Id da vacina",example = "3")
+    @Schema(description = "ID único da vacina gerado automaticamente",example = "3")
     private Integer idVaccine;
-    @Schema(description = "Id do pet que tem que tomar a vacina", example = "140")
+    @Schema(description = "ID do pet que tem que tomar a vacina", example = "140")
     private Integer idPet;
     @Schema(description = "Nome da vacina", example = "Raiva")
     private String name;
