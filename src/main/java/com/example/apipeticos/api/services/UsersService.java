@@ -51,23 +51,15 @@ public class UsersService {
         } catch (DuplicateKeyException e) {
             // Exceção quando um campo UNIQUE, como username ou email, já existe no banco
             if (e.getMessage().contains("username")) {
-                System.err.println("Erro: Nome de usuário já existe: " + e.getMessage());
-                throw new Exception("O nome de usuário já está em uso.", e);
+                throw new DuplicateKeyException("O nome de usuário já está em uso.", e);
             } else if (e.getMessage().contains("email")) {
-                System.err.println("Erro: Email já cadastrado: " + e.getMessage());
-                throw new Exception("O email já está cadastrado.", e);
+                throw new DuplicateKeyException("O email já está cadastrado.", e);
             } else {
-                System.err.println("Erro de chave duplicada: " + e.getMessage());
-                throw new Exception("Já existe um registro com as informações fornecidas.", e);
+                throw new DuplicateKeyException("Já existe um registro com as informações fornecidas.", e);
             }
         } catch (IllegalArgumentException e) {
             // Captura exceções relacionadas a argumentos inválidos
-            System.err.println("Argumento in/   válido fornecido: " + e.getMessage());
-            throw new Exception("Dados inválidos fornecidos para inserir o profissional.", e);
-        } catch (Exception e) {
-            // Exceção geral para capturar qualquer outra exceção não prevista
-            System.err.println("Erro inesperado ao inserir profissional: " + e.getMessage());
-            throw new Exception("Erro desconhecido ao tentar inserir o profissional.", e);
+            throw new IllegalArgumentException("Dados inválidos fornecidos para inserir o profissional.", e);
         }
     }
 

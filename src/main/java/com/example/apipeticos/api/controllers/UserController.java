@@ -5,6 +5,7 @@ import com.example.apipeticos.api.models.Users;
 import com.example.apipeticos.api.services.UsersService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -27,14 +28,18 @@ public class UserController {
 
 
     @PostMapping("/inserttutor")
-    public Integer inserirUsuario(@Valid @RequestBody Users tutorRequest, BindingResult result) {
-
-        if (result.hasErrors()){
+    public ResponseEntity<?> inserirUsuario(@Valid @RequestBody Users tutorRequest, BindingResult result) {
+        if (result.hasErrors()) {
             Map<String, String> erros = validateUser(result);
-            return -1;
-        }else {
-            usersService.insertUser(tutorRequest);
-            return usersService.findByUsername(tutorRequest.getUsername()).getIdUser();
+            return ResponseEntity.badRequest().body(erros); // Retorna erros de validação
+        } else {
+            try {
+                usersService.insertUser(tutorRequest);
+                Integer idUsuario = usersService.findByUsername(tutorRequest.getUsername()).getIdUser();
+                return ResponseEntity.ok(idUsuario); // Retorna o ID do usuário inserido
+            } catch (Exception e) {
+                return ResponseEntity.badRequest().body(e.toString()); // Retorna mensagem genérica
+            }
         }
 
     }
@@ -49,9 +54,15 @@ public class UserController {
                 usersService.insertUserProfissonal(tutorRequest);
                 Integer idUsuario = usersService.findByUsername(tutorRequest.getUsername()).getIdUser();
                 return ResponseEntity.ok(idUsuario); // Retorna o ID do usuário inserido
-            } catch (Exception e) {
-                return ResponseEntity.badRequest().body(e.toString()); // Retorna mensagem genérica
+            } catch (DuplicateKeyException e){
+               return ResponseEntity.badRequest().body(e.getMessage());
             }
+            catch (IllegalArgumentException e){
+                return ResponseEntity.unprocessableEntity().body("Dados inválidos fornecidos para inserir o profissional.");
+            }
+            catch (Exception e) {
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                        .body("Erro inesperado ao inserir o profissional. Por favor, tente novamente mais tarde.");            }
         }
     }
 
