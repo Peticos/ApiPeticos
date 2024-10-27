@@ -30,4 +30,6 @@ public class Vaccine {
     private String name;
     @Schema(description = "Numeros de Dose que a Vacina Tem", example = "2")
     private Integer numDoses;
+    @Schema(description = "Numeros de Doses que já foram tomadas", example = "1")
+    private Integer dosesTaked;
 }
