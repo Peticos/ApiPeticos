@@ -24,7 +24,8 @@ public class VaccineService {
     }
 
     public Integer insertVaccine(Vaccine vaccine){
-        vaccineRepository.save(vaccine);
-        return vaccine.getIdVaccine();
+            vaccineRepository.save(vaccine);
+            return vaccine.getIdVaccine();
+
     }
 }
