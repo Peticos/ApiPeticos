@@ -2,6 +2,7 @@ package com.example.apipeticos.api.repositories;
 
 
 import com.example.apipeticos.api.models.PetRegister;
+import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -41,7 +42,8 @@ public interface PetRegisterRepository extends JpaRepository<PetRegister, Intege
     );
 
     @Modifying
-    @Query(value = "CALL update_pet(:idPet, :nickname, :age, :sex, :specie, :race, :size, :color)", nativeQuery = true)
+    @Transactional
+    @Procedure("update_pet")
     void updatePet(
             @Param("idPet") Integer idPet,
             @Param("nickname") String nickname,
