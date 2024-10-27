@@ -59,7 +59,8 @@ public class VaccineController {
                                     value = "{\n" +
                                             "  \"idPet\": 145, \n" +
                                             "  \"name\": \"Rabies\",  \n" +
-                                            "  \"numDoses\": 2       \n" +
+                                            "  \"numDoses\": 2,       \n" +
+                                            "\"dosesTaked\": 0       \n"+
                                             "}", description = "Exemplo para inserir vacina. Não é necessário informar o idVacinas, pois a API gera esse número automaticamente. Lembre-se de usar um idPet válido!"),
 
                     }
