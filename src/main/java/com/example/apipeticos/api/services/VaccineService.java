@@ -28,4 +28,18 @@ public class VaccineService {
             return vaccine.getIdVaccine();
 
     }
+
+    public void updateDose(Integer id){
+        Vaccine vaccine = vaccineRepository.findById(id).orElseThrow();
+
+        if (vaccine.getDosesTaked()!=null){
+            vaccine.setDosesTaked(vaccine.getDosesTaked()+1);
+
+        }else{
+            vaccine.setDosesTaked(1);
+        }
+
+        vaccineRepository.save(vaccine);
+
+    }
 }

@@ -18,6 +18,7 @@ public class DosesService {
 
     public void insertDoses(Doses doses){
         dosesRepository.save(doses);
+
     }
 
     public List<Doses> getByIdVaccine(Integer id){
