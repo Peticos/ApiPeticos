@@ -22,6 +22,10 @@ public class VakinhasService {
         return vakinhaRepository.findAll();
     }
 
+    public List<Vakinha> findByIdUser(Integer id){
+        return vakinhaRepository.findByIdUser(id);
+    }
+
     public static int insertVakinhaRPA(Vakinha vakinha){
         try {
             ProcessBuilder pb = new ProcessBuilder(
