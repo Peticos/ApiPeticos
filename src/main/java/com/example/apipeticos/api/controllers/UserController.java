@@ -4,6 +4,7 @@ import com.example.apipeticos.api.models.ApiResponseSQL;
 import com.example.apipeticos.api.models.Users;
 import com.example.apipeticos.api.services.UsersService;
 import jakarta.validation.Valid;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.http.HttpStatus;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/user")
@@ -102,8 +104,16 @@ public class UserController {
 
 
     @GetMapping("/findbyid/{id}")
-    public Users findById(@PathVariable Integer id){
-        return usersService.findbyId(id);
+    public ResponseEntity<?> findById(@PathVariable Integer id){
+
+        Optional<Users> users =usersService.findbyId(id);
+        if(users.isPresent()){
+            return ResponseEntity.ok(users.get());
+        }
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Usuário com ID " + id + " não foi encontrado.");
+
+
     }
 
     @GetMapping("/getbyusername/{username}")

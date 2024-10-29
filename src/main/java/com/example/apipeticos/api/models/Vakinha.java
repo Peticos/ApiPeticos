@@ -19,6 +19,7 @@ public class Vakinha {
     @GeneratedValue(strategy = GenerationType.IDENTITY) // or GenerationType.AUTO
     Integer idVakinha;
     Integer idPet;
+    Integer idUser;
     String title;
     String link;
     Double totalDonated;

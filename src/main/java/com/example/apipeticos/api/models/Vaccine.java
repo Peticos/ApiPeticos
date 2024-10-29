@@ -32,4 +32,6 @@ public class Vaccine {
     private Integer numDoses;
     @Schema(description = "Numeros de Doses que já foram tomadas", example = "1")
     private Integer dosesTaked;
+
+
 }

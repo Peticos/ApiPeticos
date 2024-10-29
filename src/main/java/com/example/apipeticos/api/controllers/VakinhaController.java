@@ -2,9 +2,8 @@ package com.example.apipeticos.api.controllers;
 
 import com.example.apipeticos.api.models.Vakinha;
 import com.example.apipeticos.api.services.VakinhasService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,4 +22,13 @@ public class VakinhaController {
         return vakinhasService.findAll();
     }
 
+    @PostMapping("/insert")
+    public ResponseEntity<?> insert(@RequestBody Vakinha vakinha){
+
+        try {
+            return ResponseEntity.ok(vakinhasService.insertVakinhaRPA(vakinha));
+        }catch (Exception e){
+            return ResponseEntity.badRequest().body("");
+        }
+    }
 }
