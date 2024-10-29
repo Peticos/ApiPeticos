@@ -3,12 +3,11 @@ package com.example.apipeticos.api.services;
 import com.example.apipeticos.api.models.Users;
 import com.example.apipeticos.api.repositories.UsersRepository;
 import jakarta.transaction.Transactional;
-import org.apache.coyote.BadRequestException;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 
-import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UsersService {
@@ -27,8 +26,8 @@ public class UsersService {
         return usersRepository.findByUsername(username);
     }
 
-    public Users findbyId(Integer id){
-        return usersRepository.findById(id).orElseThrow();
+    public Optional<Users> findbyId(Integer id){
+        return usersRepository.findById(id) ;
     }
 
     @Transactional
@@ -72,8 +71,12 @@ public class UsersService {
     }
 
     public Users deleteUser(Integer id){
-        Users user = findbyId(id);
-        usersRepository.deleteByUsername(user.getUsername());
-        return user;
+        Optional<Users> user = findbyId(id);
+        if (!user.isEmpty()){
+            Users users= user.get();
+            usersRepository.deleteByUsername(users.getUsername());
+            return users;
+        }
+        return new Users();
     }
 }
