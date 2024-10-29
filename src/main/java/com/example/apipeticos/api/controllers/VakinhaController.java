@@ -32,8 +32,13 @@ public class VakinhaController {
             @ApiResponse(responseCode = "500", description = "Erro interno do servidor", content = @Content)
     })
     @GetMapping("/getall")
-    public List<Vakinha> getAll(){
-        return vakinhasService.findAll();
+    public ResponseEntity<?> getAll(){
+        try {
+            return ResponseEntity.ok(vakinhasService.findAll());
+        }catch (Exception e){
+            return ResponseEntity.internalServerError().body("Erro ao Buscar Vakinhas");
+        }
+
     }
 
     @Operation(summary = "Insere uma nova Vakinha por meio de um RPA")
@@ -78,7 +83,7 @@ public class VakinhaController {
         try {
             return ResponseEntity.ok(vakinhasService.findByIdUser(id));
         }catch (Exception e){
-            return ResponseEntity.internalServerError().body("Erro na api");
+            return ResponseEntity.internalServerError().body("Erro ao buscar Vakinha");
         }
     }
 }
