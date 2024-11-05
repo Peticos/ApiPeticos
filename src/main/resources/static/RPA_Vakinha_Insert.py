@@ -12,13 +12,14 @@ import sys
 
 #--------------------------------------------------------------------------
 
-
+#Pegando a senha do banco no .env:
+password = os.getenv('PASSWORD12')
 
 #Conectando com o banco:
 conn = pg.connect(
     dbname = "dbPeticos_2ano",
     user = "avnadmin",
-    password = os.getenv("DB_PASSWORD"),
+    password = "AVNS_-5W7guGY9QRwA4NOolM",
     host = "db-peticos-cardosogih.k.aivencloud.com",
     port = 16207
 )
@@ -42,22 +43,22 @@ def inserindo_dados(link_vakinha, id_pet, id_user):
     #Pegando as informações necessários com o XPATH:
 
     #Obtendo título da vakinha:
-    title = str(driver_vakinha.find_element(By.XPATH, '//*[@id="__next"]/div[5]/div[1]/div/div/h1').text)
+    title = str(driver_vakinha.find_element(By.XPATH, '/html/body/div[1]/div[4]/div[1]/div/div/h1').text)
 
     #Obtendo a imagem da vakinha:
-    image_temp = driver_vakinha.find_element(By.XPATH, '//*[@id="__next"]/div[5]/div[2]/div[1]/div/a/div/picture/div/img')
+    image_temp = driver_vakinha.find_element(By.XPATH, '/html/body/div[1]/div[4]/div[2]/div[1]/div/a/div/picture/div/img')
 
     #Obetando descrição da vakinha:
-    description = str(driver_vakinha.find_element(By.XPATH, '//*[@id="__next"]/div[5]/div[3]/div[2]/div/div[4]/p[2]').text)
+    description = str(driver_vakinha.find_element(By.XPATH, '/html/body/div[1]/div[4]/div[3]/div[2]/div/div[4]').text)
 
     #Obtendo o valor arrecado na vakinha:
-    total_donated_temp = driver_vakinha.find_element(By.XPATH, '//*[@id="__next"]/div[5]/div[2]/div[2]/div/div/div/div[3]/div/span').text
+    total_donated_temp = driver_vakinha.find_element(By.XPATH, '/html/body/div[1]/div[4]/div[2]/div[2]/div/div/div/div[3]/div/span').text
 
     #Obtendo a meta da vakinha:
-    goal_amount_temp = driver_vakinha.find_element(By.XPATH, '//*[@id="__next"]/div[5]/div[2]/div[2]/div/div/div/div[3]/div/div[3]/span').text
+    goal_amount_temp = driver_vakinha.find_element(By.XPATH, '/html/body/div[1]/div[4]/div[2]/div[2]/div/div/div/div[3]/div/div[3]/span').text
 
     #Obtendo a quantidade de pessoas que já doaram:
-    supporters_amount_temp = driver_vakinha.find_element(By.XPATH, '//*[@id="__next"]/div[5]/div[2]/div[2]/div/div/div/div[3]/div/div[4]/span').text
+    supporters_amount_temp = driver_vakinha.find_element(By.XPATH, '/html/body/div[1]/div[4]/div[2]/div[2]/div/div/div/div[3]/div/div[4]/span').text
 
     #--------------------------------------------------------------------------
     #Trando os dados extraidos:
