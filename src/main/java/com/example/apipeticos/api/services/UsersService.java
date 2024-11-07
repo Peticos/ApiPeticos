@@ -23,7 +23,7 @@ public class UsersService {
     }
 
     public Users findByUsername(String username){
-        return usersRepository.findByUsername(username);
+        return usersRepository.findByUsername(username).orElseThrow();
     }
 
     public Optional<Users> findbyId(Integer id){
@@ -67,6 +67,7 @@ public class UsersService {
     }
 
     public void updateUser(Users users){
+
         usersRepository.updateUserTutor(users.getFullName(),users.getUsernameId(),users.getUsername(),users.getEmail(),users.getBairro(),users.getPhone(),users.getGender(), users.getProfilePicture());
     }
 

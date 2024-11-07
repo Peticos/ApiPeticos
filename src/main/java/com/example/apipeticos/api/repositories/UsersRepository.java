@@ -15,7 +15,7 @@ public interface UsersRepository extends JpaRepository<Users, Integer> {
     @Procedure(name = "delete_user")
     void deleteByUsername(String username_param);
     @Query(value = "SELECT * FROM select_user(CAST(:username_param AS varchar))", nativeQuery = true)
-    Users findByUsername(@Param("username_param") String username);
+    Optional<Users> findByUsername(@Param("username_param") String username);
 
     @Query(value = "SELECT * FROM select_user(:id)", nativeQuery = true)
     Optional<Users> findById(@Param("id") Integer id);
